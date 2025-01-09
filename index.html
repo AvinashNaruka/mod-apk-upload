@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mod APK Upload with Password</title>
+  <!-- Google AdSense integration -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXX"
+       data-ad-slot="XXXXXXX"
+       data-ad-format="auto"></ins>
+  <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</head>
+<body>
+  <h1>Mod APK Upload with Password</h1>
+
+  <!-- Mod APK Disclaimer -->
+  <div>
+    <h2>What is a Mod APK?</h2>
+    <p>A Mod APK is a modified version of an Android application. It often comes with unlocked features, cheats, or premium content available for free. Please note that using modded APKs may violate the terms of service of the original app, so use them responsibly.</p>
+    <p><strong>Disclaimer:</strong> We are not responsible for any damage caused by using these files. Always ensure the source is trusted and that you're aware of the risks.</p>
+  </div>
+
+  <!-- Password form -->
+  <div id="passwordForm">
+    <label for="password">Enter Password to Upload Mod APK:</label>
+    <input type="password" id="password" placeholder="Enter your password" />
+    <button onclick="checkPassword()">Submit</button>
+    <p id="errorMessage" style="color: red; display: none;">Incorrect password. Please try again.</p>
+  </div>
+
+  <!-- APK upload form (hidden initially) -->
+  <div id="uploadForm" style="display: none;">
+    <input type="file" id="apkFile" accept=".apk" />
+    <button onclick="uploadFile()">Upload Mod APK</button>
+  </div>
+
+  <h2>Ads</h2>
+  <!-- Place an ad below the upload section -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXX"
+       data-ad-slot="XXXXXXX"
+       data-ad-format="auto"></ins>
+
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js"></script>
+  <script>
+    // Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const storage = firebase.storage();
+
+    // Function to check the password
+    function checkPassword() {
+      const passwordInput = document.getElementById("password").value;
+      const correctPassword = "Avinash@2009";  // Your password
+
+      if (passwordInput === correctPassword) {
+        // Show the upload form if password is correct
+        document.getElementById("passwordForm").style.display = "none";
+        document.getElementById("uploadForm").style.display = "block";
+      } else {
+        // Show error message if password is incorrect
+        document.getElementById("errorMessage").style.display = "block";
+      }
+    }
+
+    // Function to upload the Mod APK
+    function uploadFile() {
+      const fileInput = document.getElementById('apkFile');
+      const file = fileInput.files[0];
+
+      if (file && file.type === "application/vnd.android.package-archive") {
+        // Create a reference to Firebase Storage
+        const storageRef = storage.ref('mod_apks/' + file.name);
+        
+        // Upload the file
+        const uploadTask = storageRef.put(file);
+
+        uploadTask.on('state_changed', function(snapshot) {
+          // Monitor upload progress
+        }, function(error) {
+          alert("Upload failed!");
+        }, function() {
+          alert("Mod APK uploaded successfully!");
+        });
+      } else {
+        alert("Please select a valid APK file.");
+      }
+    }
+  </script>
+</body>
+</html>
