@@ -3,50 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mod APK Upload</title>
-  <script src="https://cdn.filestackcontent.com/filestack-js.js"></script> <!-- Latest Filestack SDK -->
+  <title>Will You Be Mine? ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fade-in 1s ease-in-out;
+      transition: background 1.5s ease-in-out;
+    }
+
+    @keyframes fade-in {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .card {
+      text-align: center;
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      position: relative;
+      z-index: 10;
+      animation: pop-in 1.5s ease;
+    }
+
+    @keyframes pop-in {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ff6f61;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      background-color: #ff6f61;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #fa8072;
+    }
+
+    #no-btn {
+      background-color: #ff9a9e;
+    }
+
+    .celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #ff9a9e, #ffdde1);
+      display: none; /* Initially hidden */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      animation: celebration-fade-in 2s forwards;
+    }
+
+    @keyframes celebration-fade-in {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .celebration h1 {
+      font-size: 3.5rem;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .celebration p {
+      font-size: 1.5rem;
+      color: #fff;
+      text-align: center;
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    /* Typewriter Animation */
+    .typewriter p {
+      font-size: 1.5rem;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid white;
+      animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      from { border-right-color: white; }
+      to { border-right-color: transparent; }
+    }
+
+    /* Made By */
+    .made-by {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 8px 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 105, 135, 0.8);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px rgba(255, 105, 135, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(255, 105, 135, 1); }
+      100% { box-shadow: 0 0 10px rgba(255, 105, 135, 0.5); }
+    }
+  </style>
 </head>
 <body>
-  <h1>Upload Your Mod APK</h1>
+  <!-- Main Card -->
+  <div class="card" id="main-card">
+    <h1>Will you be mine? ❤️</h1>
+    <p>You are my everything, and I promise to cherish you forever! 💕</p>
+    <div class="btns">
+      <button id="yes-btn">Yes</button>
+      <button id="no-btn">No</button>
+    </div>
+  </div>
 
-  <!-- Password form to allow file upload -->
-  <label for="password">Enter Password:</label>
-  <input type="password" id="password" placeholder="Enter password" />
-  <button onclick="checkPassword()">Submit</button>
-  <p id="errorMessage" style="color: red; display: none;">Incorrect password. Please try again.</p>
+  <!-- Made By -->
+  <div class="made-by">Made for you by <span>Avinash</span> with ❤️</div>
 
-  <!-- File upload form (hidden initially) -->
-  <div id="uploadForm" style="display: none;">
-    <button id="uploadButton">Upload Mod APK</button>
+  <!-- Celebration Screen -->
+  <div class="celebration" id="celebration">
+    <h1>You Said Yes! ❤️</h1>
+    <div class="typewriter">
+      <p>I knew you couldn't resist my charm! 💕 Now let’s write our love story together... ✨</p>
+    </div>
   </div>
 
   <script>
-    const filestackApiKey = 'YOUR_API_KEY'; // Replace with your Filestack API key
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+    const celebration = document.getElementById('celebration');
+    const mainCard = document.getElementById('main-card');
+    let noClickCount = 0;
 
-    // Initialize Filestack client
-    const client = filestack.init(filestackApiKey);
+    // "Yes" Button Action
+    yesBtn.addEventListener('click', () => {
+      celebration.style.display = 'flex'; // Show celebration screen
+      document.body.style.background = "radial-gradient(circle, #ffb3c1, #ff758c)";
+    });
 
-    // Check password before allowing upload
-    function checkPassword() {
-      const passwordInput = document.getElementById('password').value;
-      const correctPassword = 'Avinash@2009'; // Password for uploading files
+    // "No" Button Moves
+    noBtn.addEventListener('mouseenter', () => {
+      if (noClickCount >= 3) {
+        const randomX = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
-      if (passwordInput === correctPassword) {
-        document.getElementById('uploadForm').style.display = 'block';  // Show upload button
-      } else {
-        document.getElementById('errorMessage').style.display = 'block'; // Show error
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = `${randomX}px`;
+        noBtn.style.top = `${randomY}px`;
       }
-    }
+    });
 
-    // Initialize Filestack file picker
-    document.getElementById('uploadButton').onclick = function () {
-      client.picker({
-        accept: ['.apk'], // Allow only APK files
-        onFileUploadFinished: function(file) {
-          alert('File uploaded: ' + file.url); // Show success message with file URL
-        }
-      }).open();
-    };
+    noBtn.addEventListener('click', () => {
+      noClickCount++;
+      const dialogues = [
+        "Are you sure you want to say no? 🥺",
+        "Please don’t break my heart. 💔",
+        "You know you can’t say no to me! 😘"
+      ];
+      if (noClickCount <= 3) {
+        alert(dialogues[noClickCount - 1]);
+      }
+    });
   </script>
 </body>
 </html>
